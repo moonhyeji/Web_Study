@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>Jsp05_HelloServlet</display-name>
+  <welcome-file-list>
+    <welcome-file>home.html</welcome-file>
+    <!-- welcome file list - welcome file: 원하는 프로젝트를 시작했을 때 가장 먼저 보여주는 부분-->
+    <!--프로젝트 시작햇을 때 home.html 파일을 가장 먼저 화면에 보이도록 하겠다.  -->
+  </welcome-file-list>
+
+	<context-param> <!-- context- 전체에서 사용가능한 parameter.
+	 = 어떤 servlet에서든 다 사용가능하다. -->
+	   <param-name>singer</param-name>
+	   <param-value>billie</param-value>
+	</context-param>
+	
+	
+	<servlet>
+	   <servlet-name>hello world</servlet-name>  <!--  임의의 서블릿의 이름 지정 -->
+	   <servlet-class>com.hello.controller.HelloServlet</servlet-class>
+	   <!--매핑할 클래스의 이름입력(패키지명포함)  -->
+	   <!--HelloServlet hello = new HelloServlet(); dl -->
+			   <init-param> <!-- initialized-param: 해당 servlet 안에서만 사용 가능한 parameter   -->
+			      <param-name>actor</param-name>
+			      <param-value>정우성</param-value> <!-- 해당 servlet 안에서 사용가능.  -->
+			   </init-param>
+			   <load-on-startup>1</load-on-startup> <!--  서버가 시작되고 몇번째로 요청될 것인가? 1이니까 첫번째로 요청됨.-->
+	</servlet>
+	
+	<servlet-mapping>
+	<!-- <servlet>안의 <servlet-name>과 <sevlet-mapping>안의 <servlet-name>은 서로 항상 같아야한다.
+	맵핑에서 어떤 url을 호출했을 때 어떤 서블릿을 호출할지 결정하는게 서블릿 네임이기 때문이다. --> 
+	   <servlet-name>hello world</servlet-name> <!--  임의의 서블릿의 이름 -->
+	   <url-pattern>/hello.do</url-pattern>
+	   <!-- 서블렛 클래스를 맵핑할 이름 입력 (주의: '/'로 시작할것.) -->
+	</servlet-mapping>
+
+</web-app>
+
+<!--  web.xml
+: deployment descriptor: 배포기술자.
+: 서버에 프로젝트를 올렸을 때 프로젝트의 설정을 서버에게 알려주는 역할을 한다. -->

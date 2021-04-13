@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+
+<h1>HOME</h1>
+
+<a href="hello.do?command=hello">hello</a> <!-- hello 라는 글자에 링크를 걸어준다. -->
+
+<form action="controller.do" method="post">
+<!-- 서브릿 controller.do에 보내겠다는 뜻-->
+    <input type="hidden" name="command" value="servlet">
+    <input type="submit" value="servlet">
+    <!-- 데이터를 보내는 시점-->
+</form>
+
+</body>
+</html>
+
+
+ <!-- form태그:속성을 서버에 전달해주는 태그 /
+ action :폼에 입력한 값들을 전달할 서버에 대한 경로 /
+ 방식: post-->
