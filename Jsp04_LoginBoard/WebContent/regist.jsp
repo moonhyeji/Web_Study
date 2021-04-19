@@ -36,7 +36,7 @@ function idCheckConfirm(){
 <body>
 
 
-<h1>regist form</h1>
+<h1>Register form</h1>
 <form action="logincontroller.jsp" method="post">
    <input type="hidden" name="command" value="insertuser">
 <!--hidden:
@@ -60,7 +60,7 @@ function idCheckConfirm(){
               <td><input type="text" name="myname" required="required" onclick="idCheckConfirm();"></td>
           </tr>
           <tr>
-              <th>ADRESS</th>
+              <th>ADDRESS</th>
               <td><input type="text" name="myaddr" required="required" onclick="idCheckConfirm();"></td>
           </tr>
           <tr>
@@ -73,7 +73,7 @@ function idCheckConfirm(){
           </tr>
           <tr>
             <td colspan="2">
-               <input type="submit" value="가입">
+            <input type="submit" value="가입">
             </td>
          </tr>
           

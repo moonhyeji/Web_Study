@@ -24,7 +24,7 @@
         
         <div>
           <p> 
-          <a href="">내 정보 보기</a>
+          <a href="logincontroller.jsp?command=userdetail&myno=${dto.myno }">내 정보 보기</a>
           </p>
         </div>
 </body>
