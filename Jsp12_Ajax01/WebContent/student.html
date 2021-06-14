@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+ 
+ 
+ 
+ function getParameterValues(){
+	 var name = encodeURIComponent($("#name").val());
+	 var kor = $("#kor").val();
+	 var eng = $("#eng").val();
+	 var math = $("#math").val();   ///이름,국어,영어,수학점수 받아서,
+	 
+	 return "?name=" +name+ "&kor=" +kor+"&eng=" +eng+ "&math=" +math; //쿼리스트링으로 만들고 있음. 
+	//쿼리스트링: key=vlaue 형태로 값을 전달하고 있는 것, (get방식이기 때문에 주소창에 보임. (? 부터 시작해서 k=v를 & 로 이어주는 형태이다.)
+	 //이 쿼리스트링을 아래 $.ajax 에서 url뒤에 붙여줄 것이다. 
+	 
+	 
+	 //encodeURIComponent:
+ }
+	 
+ 
+ 
+	 $(function(){   //비동기통신  
+		$("#process").click(function(){
+			var queryString = getParameterValues();
+			//alert(queryString);
+			
+			$.ajax({
+				url:"score.do" + queryString, //score.do로 보낼건데 ,name=이름&kor=70....이 형태로 보낼것이다.
+				dataType:"json",   //요청해서, 응답받을 때 string타입으로 응답받을 건데,문자열을 json 으로 바꾸겠다.  /datatype=응답되는 값의 타입 
+				success:function(msg){  //성공했을 때 실행함수: 여기서 msg는 바로위 dataType:"json"에 의해서 json 형태로 바뀜. 응답받는객체 = json객체 로 됨.
+					//console.log(msg);
+				    //console.log(typeof(mgs));
+					$("#result").html(decodeURIComponent(msg.name) + "<br>총점:" +msg.sum + "<br>평균:" +msg.avg);
+					//msg.name 가져와서 쓸거야. msg.name 인 이유는ScoreServlet에서 obj.put("name",name);이런식으로 값을 k:v형태로 json객체로 만들어서 전달해줬기 때문에,
+				      //json객체에서 값을 꺼내올 때 '객체.key' 로 해주면 해당 키에 맞는 value값이 나오기 때문에,  
+				
+				//decodeURIComponent:
+				},
+				error:function(){  //실패했을 때 실행함수 
+					alert("통신 실패");
+				}
+			});
+		}); 
+	 });
+	 
+</script>
+
+
+</head>
+<body>
+   <h1>성적 처리 프로그램</h1>
+   
+   이름: <input type="text" id="name"><br>
+   국어: <input type="text" id="kor"><br>
+   영어: <input type="text" id="eng"><br>
+   수학: <input type="text" id="math"><br>
+   <input type="button" id="process" value="성적처리"><br>
+   <br>
+   <div id="result"></div>
+   
+</body>
+</html>
