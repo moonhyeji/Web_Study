@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- **작성 순서**
+
+db.properties
+
+mapper.xml
+
+config.xml
+
+SqlMapConfig.java
+
+Dao
+
+이후에는 (mapper ↔ Dao ) -->
+<mapper namespace="com.my.mapper">
+  
+  
+  <resultMap type="myBoardDto" id="myBoardMap">
+           <result property="myno" column="MYNO"/>
+           <result property="myname" column="MYNAME"/>
+           <result property="mytitle" column="MYTITLE"/>
+           <result property="mycontent" column="MYCONTENT"/>
+           <result property="mydate" column="MYDATE"/>
+  </resultMap>
+  
+  
+  <select id="selectList" resultMap="myBoardMap">
+  <!-- <typeAliases> 에 의해서 resultMap:com.my.dto.MyBoardDto 가 MyBoardDto 이렇게 바뀜. -->
+  <!--  ResultType: 이 셀렉트 결과를 담을 타입이 어디냐?--> 
+  SELECT MYNO, MYNAME, MYTITLE, MYCONTENT, MYDATE
+  FROM MYBOARD
+  ORDER BY MYNO DESC
+
+  </select>
+  
+  <select id="selectOne" parameterType="int" resultType="myBoardDto">
+  SELECT MYNO, MYNAME, MYTITLE, MYCONTENT, MYDATE
+  FROM MYBOARD
+  WHERE MYNO = #{myno}
+  </select>
+  
+
+  <insert id="insert" parameterType="myBoardDto">
+  INSETRT INTO MYBOARD
+  VALUES(MYBOARDSEQ.NEXTVAL, #{myname}, #{mytitle}, #{mycontent}, SYSDATE)
+  </insert>
+  
+  <update id="update" parameterType="myBoardDto">  <!-- dao에서 받은 파라미터 dto의 타입이 myBoardDto 니까 파라미터 타입이 myBoardDto-->
+  UPDATE MYBOARD
+  SET MYTITLE = #{mytitle}, MYCONTENT=#{mycontent}
+  WHERE MYNO = #{myno}
+  </update>
+  
+  <delete id="delete" parameterType="int">   <!-- dao에서 받은 #{myno}의 타입이 int 타입이니까 parametertype이 int  -->
+     DELETE FROM MYBOARD
+     WHERE MYNO = #{myno}
+  </delete>
+</mapper>
